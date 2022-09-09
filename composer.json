@@ -52,6 +52,9 @@
             "BehatNelmioDescriber\\Tests\\": "tests"
         }
     },
+    "allow-plugins": {
+        "dealerdirect/phpcodesniffer-composer-installer": true
+    },
     "scripts": {
         "composer-validate": "composer validate",
         "phpstan": "./vendor/bin/phpstan analyse -l max",

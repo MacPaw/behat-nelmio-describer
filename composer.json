@@ -52,8 +52,10 @@
             "BehatNelmioDescriber\\Tests\\": "tests"
         }
     },
-    "allow-plugins": {
-        "dealerdirect/phpcodesniffer-composer-installer": true
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     },
     "scripts": {
         "composer-validate": "composer validate",

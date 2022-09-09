@@ -1,14 +1,15 @@
 {
     "name": "macpaw/behat-nelmio-describer",
     "type": "symfony-bundle",
-    "description": "Bundle for adding sample responses nelmio to api doc",
+    "description": "Bundle for adding sample responses behat test nelmio to api doc",
     "keywords": [
         "MacPaw",
         "symfony",
         "behat",
         "swagger",
         "api-doc",
-        "nelmio"
+        "nelmio",
+        "symfony-bundle"
     ],
     "authors": [
         {

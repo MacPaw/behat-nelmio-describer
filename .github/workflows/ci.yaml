@@ -16,8 +16,8 @@ jobs:
                     - '8.1'
                 coverage: ['none']
                 symfony-versions:
-                    - '4.4.*'
-                    - '5.4.*'
+                    - '4.0.*'
+                    - '5.0.*'
                     - '6.0.*'
                 include:
                     - description: 'Log Code Coverage'

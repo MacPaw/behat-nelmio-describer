@@ -17,11 +17,7 @@ class FileContentRetriever
             return null;
         }
 
-        $content = $this->getFileContent($filepath, $anchor);
-
-        return $content === null
-            ? null
-            : str_replace("\\\\", "\\", $content);
+        return $this->getFileContent($filepath, $anchor);
     }
 
     private function getFileContent(string $filepath, string $anchor): ?string

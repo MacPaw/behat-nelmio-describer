@@ -1,0 +1,4 @@
+services:
+    BehatNelmioDescriber\Tests\Functional\App\Controller\:
+        resource: '../Controller/*Controller.php'
+        tags: ['controller.service_arguments']

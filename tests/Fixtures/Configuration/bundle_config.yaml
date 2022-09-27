@@ -1,0 +1,2 @@
+behat_nelmio_describer:
+    behat_test_path: '/tests/Behat/Features'

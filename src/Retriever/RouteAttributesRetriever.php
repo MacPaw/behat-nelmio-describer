@@ -20,8 +20,10 @@ class RouteAttributesRetriever
     ) {
     }
 
-    public function getRouteAttributes(): \Generator
+    public function getRouteAttributes(): array
     {
+        $result = [];
+
         foreach ($this->routeCollection->all() as $route) {
             if (!$route->hasDefault('_controller')) {
                 continue;
@@ -37,13 +39,15 @@ class RouteAttributesRetriever
                 $featuresPath = $featuresPathAttributes[0]->getArguments()['path'];
             }
 
-            yield new RouteAttributesInfo(
+            $result[] = new RouteAttributesInfo(
                 $this->normalizePath($route->getPath()),
                 $featuresPath,
                 $this->getSupportedHttpMethods($route),
                 $reflectionMethod->getAttributes(BehatFeature::class)
             );
         }
+
+        return $result;
     }
 
     private function getSupportedHttpMethods(Route $route): array

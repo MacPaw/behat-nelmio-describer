@@ -62,7 +62,7 @@ class BehatDescriberTest extends KernelTestCase
     {
         yield [
             '/api/first-area/test-route',
-            "<details><summary>**success**</summary>\n```\n[Invalid reference]\n```\n</details>\n<details><summary>**failure**</summary>\n```\n[Invalid reference]\n```\n</details>\n"
+            '<details><summary>**success**</summary>\n```\n[Invalid reference]\n```\n</details>\n<details><summary>**failure**</summary>\n```\n[Invalid reference]\n```\n</details>\n'
         ];
     }
 }

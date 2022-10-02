@@ -12,7 +12,7 @@ use Attribute;
 #[\Attribute(Attribute::TARGET_CLASS)]
 class BehatFeaturesPath
 {
-    public function __construct(public readonly string $path)
+    public function __construct(public string $path)
     {
     }
 }

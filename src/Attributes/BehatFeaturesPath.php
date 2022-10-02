@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BehatNelmioDescriber\Attributes;
 
 use Attribute;
@@ -10,6 +12,7 @@ use Attribute;
 #[\Attribute(Attribute::TARGET_CLASS)]
 class BehatFeaturesPath
 {
-    public function __construct(public readonly string $path){
+    public function __construct(public readonly string $path)
+    {
     }
 }

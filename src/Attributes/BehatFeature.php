@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BehatNelmioDescriber\Attributes;
 
 use Attribute;
@@ -14,6 +16,6 @@ class BehatFeature
         public readonly string $status,
         public readonly string $file,
         public readonly array $anchors,
-    ){
+    ) {
     }
 }

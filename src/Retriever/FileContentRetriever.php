@@ -6,7 +6,8 @@ namespace BehatNelmioDescriber\Retriever;
 
 class FileContentRetriever
 {
-    public function __construct(private string $behatTestPath) {
+    public function __construct(private string $behatTestPath)
+    {
     }
 
     public function getFileReferenceContent(string $filename, string $anchor): ?string
@@ -24,7 +25,9 @@ class FileContentRetriever
     {
         $content = '';
 
+        /** @var array $lines */
         $lines = file($filepath);
+
         $totalLinesCount = count($lines);
         $boundary = '"""';
 

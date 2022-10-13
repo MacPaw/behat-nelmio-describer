@@ -11,7 +11,7 @@ class RouteAttributesInfo
         private string $featuresPath,
         private array $supportedHttpMethods,
         private array $attributes
-    ){
+    ) {
     }
 
     public function getRoutePath(): string

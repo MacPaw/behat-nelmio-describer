@@ -1,0 +1,16 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Service
+            description: Description
+            version: 1.0.0
+    areas:
+        default:
+            path_patterns:
+                - ^/api"
+        first_area:
+            path_patterns:
+                - ^/api/first-area
+        second_area:
+            path_patterns:
+                - ^/api/second-area

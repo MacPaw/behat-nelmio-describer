@@ -10,5 +10,4 @@ class Status extends Enum
 {
     public const SUCCESS = 'success';
     public const FAILURE = 'failure';
-
 }

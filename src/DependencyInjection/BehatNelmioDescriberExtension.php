@@ -30,13 +30,16 @@ class BehatNelmioDescriberExtension extends Extension
         $this->loadApiDocDescriber($config, $loader, $container);
     }
 
-    private function loadApiDocDescriber(array $config, XmlFileLoader $loader, ContainerBuilder $container): void {
+    private function loadApiDocDescriber(array $config, XmlFileLoader $loader, ContainerBuilder $container): void
+    {
         $loader->load('file_content_retriever.xml');
 
         $fileContentRetrieverDefinition = $container->getDefinition(FileContentRetriever::class);
         $fileContentRetrieverDefinition->setArgument('$behatTestPath', $config['behat_test_path']);
 
-        foreach ($container->getParameter('nelmio_api_doc.areas') as $area) {
+        /** @var array $apiDocAreas */
+        $apiDocAreas = $container->getParameter('nelmio_api_doc.areas');
+        foreach ($apiDocAreas as $area) {
             $container->register(
                 sprintf('behat_api_doc_describer.route_attributes_retriever.%s', $area),
                 RouteAttributesRetriever::class

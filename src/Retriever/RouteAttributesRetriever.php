@@ -9,6 +9,7 @@ use BehatNelmioDescriber\Attributes\BehatFeaturesPath;
 use BehatNelmioDescriber\Dto\RouteAttributesInfo;
 use Nelmio\ApiDocBundle\OpenApiPhp\Util;
 use Nelmio\ApiDocBundle\Util\ControllerReflector;
+use ReflectionMethod;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
@@ -20,30 +21,35 @@ class RouteAttributesRetriever
     ) {
     }
 
-    public function getRouteAttributes(): \Generator
+    public function getRouteAttributes(): array
     {
+        $result = [];
+
         foreach ($this->routeCollection->all() as $route) {
             if (!$route->hasDefault('_controller')) {
                 continue;
             }
 
             $controller = $route->getDefault('_controller');
+            /** @var  ReflectionMethod $reflectionMethod */
             $reflectionMethod = $this->controllerReflector->getReflectionMethod($controller);
 
             $featuresPathAttributes = $reflectionMethod->getDeclaringClass()->getAttributes(BehatFeaturesPath::class);
 
             $featuresPath = '';
-            if(count($featuresPathAttributes) > 0) {
+            if (count($featuresPathAttributes) > 0) {
                 $featuresPath = $featuresPathAttributes[0]->getArguments()['path'];
             }
 
-            yield new RouteAttributesInfo(
+            $result[] = new RouteAttributesInfo(
                 $this->normalizePath($route->getPath()),
                 $featuresPath,
                 $this->getSupportedHttpMethods($route),
                 $reflectionMethod->getAttributes(BehatFeature::class)
             );
         }
+
+        return $result;
     }
 
     private function getSupportedHttpMethods(Route $route): array

@@ -25,12 +25,11 @@ class BehatDescriber implements DescriberInterface
         foreach ($this->routeAttributesRetriever->getRouteAttributes() as $attributeInfo) {
             $attributes = $attributeInfo->getAttributes();
 
-            if(count($attributes) == 0) {
+            if (count($attributes) == 0) {
                 continue;
             }
 
             foreach ($attributeInfo->getSupportedHttpMethods() as $httpMethod) {
-
                 $path = Util::getPath($api, $attributeInfo->getRoutePath());
                 $operation = Util::getOperation($path, $httpMethod);
 
@@ -62,6 +61,7 @@ class BehatDescriber implements DescriberInterface
 
                 $documentations = '';
                 foreach ($examples as $blockName => $contents) {
+                    /** @var array $contents */
                     $contents = array_unique($contents, SORT_REGULAR);
 
                     $documentations .= "<details><summary>**$blockName**</summary>\n";

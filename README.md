@@ -1,14 +1,10 @@
-Behat Doctrine Fixtures
+Behat Nelmio Describer
 =================================
 
 | Version | Build Status | Code Coverage |
 |:---------:|:-------------:|:-----:|
 | `master`| [![CI][master Build Status Image]][master Build Status] | [![Coverage Status][master Code Coverage Image]][master Code Coverage] |
 | `develop`| [![CI][develop Build Status Image]][develop Build Status] | [![Coverage Status][develop Code Coverage Image]][develop Code Coverage] |
-
-## Migrate from 1.x to 2.0
-
-[To migrate from 1.x to 2.0, follow our guide.](https://github.com/MacPaw/behat-doctrine-fixtures/blob/master/UPGRADE-2.0.md)
 
 Installation
 ============
@@ -18,18 +14,12 @@ Step 1: Install Bundle
 Open a command console, enter your project directory and execute:
 
 ```console
-$ composer require --dev macpaw/behat-doctrine-fixtures
+$ composer require --dev macpaw/behat-nelmio-describer
 ```
 
 This command requires you to have Composer installed globally, as explained
 in the [installation chapter](https://getcomposer.org/doc/00-intro.md)
 of the Composer documentation.
-
-If you use PostgreSQL database, you also need to install postgresql-client:
-
-```console
-$ apt-get install -y postgresql-client
-```
 
 Step 2: Enable the Bundle
 ----------------------------------
@@ -47,7 +37,7 @@ class AppKernel extends Kernel
     {
         $bundles = array(
             // ...
-            BehatDoctrineFixtures\BehatDoctrineFixturesBundle::class => ['test' => true]
+            BehatApiDocDescriber\BehatApiDocDescriberBundle::class => ['all' => true]
         );
 
         // ...
@@ -57,45 +47,48 @@ class AppKernel extends Kernel
 }
 ```
 
-Step 3: Create Behat Doctrine Fixtures Config:
+Step 3: Create Behat Nelmio Describer Config:
 ----------------------------------
-`config/packages/test/behat_doctrine_fixtures.yaml `
+`config/packages/behat_nelmio_describer.yaml `
 
-Configurating behat database context
-
-```yaml
-behat_doctrine_fixtures:
-  connections:
-    default:
-      database_fixtures_paths:
-        - <path to directory with your fixtures>
-```
-
-You don't need to explicitly pass database url here, since this bundle uses doctrine connection under the hood. For now, we support PostgreSQL and Sqlite databases.
-
-If you want to use multiple databases in your project, just add one more connection under ``behat_doctrine_fixtures.connections`` with its own configuration:
+Configurating behat nelmio describer
 
 ```yaml
-behat_doctrine_fixtures:
-  connections:
-    default:
-      database_fixtures_paths:
-        - <path to directory with your fixtures>
-    <secondConnectionName>:
-      run_migrations_command: <customMigrationsCommand>
-      database_fixtures_paths:
-        - <path to directory with your fixtures>
+behat_api_doc_describer:
+  behat_test_path: <path to directory with your behat features>
 ```
 
-Step 4: Configure Behat
+Step 4: Add annotation to controller [OPTIONAL]
 =============
-Go to `behat.yml`
 
-```yaml
-...
-  contexts:
-    - BehatDoctrineFixtures\Context\DatabaseContext
-...
+```php
+<?php
+
+use BehatApiDocDescriber\Attributes\BehatFeaturesPath;
+
+#[BehatFeaturesPath(path: "<path to folder/file with fixtures regarding base path in config>")]
+final class SomeController extends AbstractController{
+    // ... 
+}
+```
+
+Step 5: Add annotation to route
+=============
+
+```php
+<?php
+
+use BehatApiDocDescriber\Attributes\BehatFeature;
+use BehatApiDocDescriber\Enum\Status;
+
+final class SomeController extends AbstractController{
+    #[BehatFeature(status: "<string name to group by>", file: '<filename or route to file regarding base path>', anchors: [
+       // array of anchors    
+    ])]
+    public function handleRequestFunction() {
+        // ...
+    }
+}
 ```
 
 [master Build Status]: https://github.com/macpaw/behat-doctrine-fixtures/actions?query=workflow%3ACI+branch%3Amaster

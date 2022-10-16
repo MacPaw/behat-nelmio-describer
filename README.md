@@ -91,11 +91,15 @@ final class SomeController extends AbstractController{
 }
 ```
 
-[master Build Status]: https://github.com/macpaw/behat-doctrine-fixtures/actions?query=workflow%3ACI+branch%3Amaster
-[master Build Status Image]: https://github.com/macpaw/behat-doctrine-fixtures/workflows/CI/badge.svg?branch=master
-[develop Build Status]: https://github.com/macpaw/behat-doctrine-fixtures/actions?query=workflow%3ACI+branch%3Adevelop
-[develop Build Status Image]: https://github.com/macpaw/behat-doctrine-fixtures/workflows/CI/badge.svg?branch=develop
-[master Code Coverage]: https://codecov.io/gh/macpaw/behat-doctrine-fixtures/branch/master
-[master Code Coverage Image]: https://img.shields.io/codecov/c/github/macpaw/behat-doctrine-fixtures/master?logo=codecov
-[develop Code Coverage]: https://codecov.io/gh/macpaw/behat-doctrine-fixtures/branch/develop
-[develop Code Coverage Image]: https://img.shields.io/codecov/c/github/macpaw/behat-doctrine-fixtures/develop?logo=codecov
+For each anchor path from config, path from BehatFeaturesPath annotation (optional) and path/filename from BehatFeature annotation are concatenated to find the right feature file.
+
+Additionally, each BehatFeature annotation represents folder in api doc which contains all sample responses defined by anchors.
+
+[master Build Status]: https://github.com/macpaw/behat-nelmio-describer/actions?query=workflow%3ACI+branch%3Amaster
+[master Build Status Image]: https://github.com/macpaw/behat-nelmio-describer/workflows/CI/badge.svg?branch=master
+[develop Build Status]: https://github.com/macpaw/behat-nelmio-describer/actions?query=workflow%3ACI+branch%3Adevelop
+[develop Build Status Image]: https://github.com/macpaw/behat-nelmio-describer/workflows/CI/badge.svg?branch=develop
+[master Code Coverage]: https://codecov.io/gh/macpaw/behat-nelmio-describer/branch/master
+[master Code Coverage Image]: https://img.shields.io/codecov/c/github/macpaw/behat-nelmio-describer/master?logo=codecov
+[develop Code Coverage]: https://codecov.io/gh/macpaw/behat-nelmio-describer/branch/develop
+[develop Code Coverage Image]: https://img.shields.io/codecov/c/github/macpaw/behat-nelmio-describer/develop?logo=codecov

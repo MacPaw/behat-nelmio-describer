@@ -95,6 +95,91 @@ For each anchor path from config, path from BehatFeaturesPath annotation (option
 
 Additionally, each BehatFeature annotation represents folder in api doc which contains all sample responses defined by anchors.
 
+An example of usage
+=============
+
+If your feature file is located in `src/tests/Behat/Features/api/version/route/example.feature`
+
+##Configuration
+
+```yaml
+behat_api_doc_describer:
+  behat_test_path: '%kernel.project_dir%/tests/Behat/Features'
+```
+
+##Controller
+```php
+<?php
+
+namespace Some/Namespace;
+
+use BehatApiDocDescriber\Attributes\BehatFeature;
+use BehatApiDocDescriber\Attributes\BehatFeaturesPath;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use Nelmio\ApiDocBundle\Annotation as ApiDoc;
+use OpenApi\Annotations as OA;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
+
+#[Route(path: '/api/version/route', name: 'api_version_route_')]
+#[BehatFeaturesPath(path: 'api/version/route/')]
+final class CustomerController extends AbstractController
+{
+    /**
+     * Title
+     *
+     * @Route(
+     *     path="/example",
+     *     name="example",
+     *     defaults={"_format": "json"},
+     *     methods={"GET"}
+     * )
+     *
+     * @ApiDoc\Operation(tags={"Example"})
+     */
+    #[BehatFeature(status: Status::SUCCESS, file: 'example.feature', anchors: [
+       'success',
+       'successWithoutOptionalParams',    
+    ])]
+    #[BehatFeature(status: Status::FAILURE, file: 'example.feature', anchors: [
+       'paramsInvalid',    
+    ])]
+    public function getCustomerProductPlanListAction(
+        // ...
+    ) {
+        // ...
+    }
+}
+```
+
+##Feature file
+
+Contains following snippets:
+
+```
+#! success
+"""
+{
+    "example": "data""
+}
+"""
+
+#! successWithoutOptionalParams
+"""
+{
+    "example": "data""
+}
+"""
+
+#! paramsInvalid
+"""
+{
+    "example": "data""
+}
+"""
+```
+
+
 [master Build Status]: https://github.com/macpaw/behat-nelmio-describer/actions?query=workflow%3ACI+branch%3Amaster
 [master Build Status Image]: https://github.com/macpaw/behat-nelmio-describer/workflows/CI/badge.svg?branch=master
 [develop Build Status]: https://github.com/macpaw/behat-nelmio-describer/actions?query=workflow%3ACI+branch%3Adevelop

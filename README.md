@@ -37,7 +37,7 @@ class AppKernel extends Kernel
     {
         $bundles = array(
             // ...
-            BehatApiDocDescriber\BehatApiDocDescriberBundle::class => ['all' => true]
+            BehatNelmioDescriber\BehatNelmioDescriberBundle::class => ['all' => true]
         );
 
         // ...
@@ -54,7 +54,7 @@ Step 3: Create Behat Nelmio Describer Config:
 Configurating behat nelmio describer
 
 ```yaml
-behat_api_doc_describer:
+behat_nelmio_describer:
   behat_test_path: <path to directory with your behat features>
 ```
 
@@ -64,7 +64,7 @@ Step 4: Add annotation to controller [OPTIONAL]
 ```php
 <?php
 
-use BehatApiDocDescriber\Attributes\BehatFeaturesPath;
+use BehatNelmioDescriber\Attributes\BehatFeaturesPath;
 
 #[BehatFeaturesPath(path: "<path to folder/file with fixtures regarding base path in config>")]
 final class SomeController extends AbstractController{
@@ -78,8 +78,8 @@ Step 5: Add annotation to route
 ```php
 <?php
 
-use BehatApiDocDescriber\Attributes\BehatFeature;
-use BehatApiDocDescriber\Enum\Status;
+use BehatNelmioDescriber\Attributes\BehatFeature;
+use BehatNelmioDescriber\Enum\Status;
 
 final class SomeController extends AbstractController{
     #[BehatFeature(status: "<string name to group by>", file: '<filename or route to file regarding base path>', anchors: [
@@ -103,7 +103,7 @@ If your feature file is located in `src/tests/Behat/Features/api/version/route/e
 ##Configuration
 
 ```yaml
-behat_api_doc_describer:
+behat_nelmio_describer:
   behat_test_path: '%kernel.project_dir%/tests/Behat/Features'
 ```
 
@@ -113,8 +113,8 @@ behat_api_doc_describer:
 
 namespace Some/Namespace;
 
-use BehatApiDocDescriber\Attributes\BehatFeature;
-use BehatApiDocDescriber\Attributes\BehatFeaturesPath;
+use BehatNelmioDescriber\Attributes\BehatFeature;
+use BehatNelmioDescriber\Attributes\BehatFeaturesPath;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation as ApiDoc;
 use OpenApi\Annotations as OA;

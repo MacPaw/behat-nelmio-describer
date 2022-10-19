@@ -37,7 +37,7 @@ class AppKernel extends Kernel
     {
         $bundles = array(
             // ...
-            BehatApiDocDescriber\BehatApiDocDescriberBundle::class => ['all' => true]
+            BehatNelmioDescriber\BehatNelmioDescriberBundle::class => ['all' => true]
         );
 
         // ...
@@ -54,7 +54,7 @@ Step 3: Create Behat Nelmio Describer Config:
 Configurating behat nelmio describer
 
 ```yaml
-behat_api_doc_describer:
+behat_nelmio_describer:
   behat_test_path: <path to directory with your behat features>
 ```
 
@@ -64,7 +64,7 @@ Step 4: Add annotation to controller [OPTIONAL]
 ```php
 <?php
 
-use BehatApiDocDescriber\Attributes\BehatFeaturesPath;
+use BehatNelmioDescriber\Attributes\BehatFeaturesPath;
 
 #[BehatFeaturesPath(path: "<path to folder/file with fixtures regarding base path in config>")]
 final class SomeController extends AbstractController{
@@ -78,8 +78,8 @@ Step 5: Add annotation to route
 ```php
 <?php
 
-use BehatApiDocDescriber\Attributes\BehatFeature;
-use BehatApiDocDescriber\Enum\Status;
+use BehatNelmioDescriber\Attributes\BehatFeature;
+use BehatNelmioDescriber\Enum\Status;
 
 final class SomeController extends AbstractController{
     #[BehatFeature(status: "<string name to group by>", file: '<filename or route to file regarding base path>', anchors: [
@@ -94,6 +94,90 @@ final class SomeController extends AbstractController{
 For each anchor path from config, path from BehatFeaturesPath annotation (optional) and path/filename from BehatFeature annotation are concatenated to find the right feature file.
 
 Additionally, each BehatFeature annotation represents folder in api doc which contains all sample responses defined by anchors.
+
+An example of usage
+=============
+
+If your feature file is located in `src/tests/Behat/Features/api/version/route/example.feature`
+
+##Configuration
+
+```yaml
+behat_nelmio_describer:
+  behat_test_path: '%kernel.project_dir%/tests/Behat/Features'
+```
+
+##Controller
+```php
+<?php
+
+namespace Some/Namespace;
+
+use BehatNelmioDescriber\Attributes\BehatFeature;
+use BehatNelmioDescriber\Attributes\BehatFeaturesPath;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use Nelmio\ApiDocBundle\Annotation as ApiDoc;
+use OpenApi\Annotations as OA;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
+
+#[Route(path: '/api/version/route', name: 'api_version_route_')]
+#[BehatFeaturesPath(path: 'api/version/route/')]
+final class CustomerController extends AbstractController
+{
+    /**
+     * Title
+     *
+     * @Route(
+     *     path="/example",
+     *     name="example",
+     *     defaults={"_format": "json"},
+     *     methods={"GET"}
+     * )
+     *
+     * @ApiDoc\Operation(tags={"Example"})
+     */
+    #[BehatFeature(status: Status::SUCCESS, file: 'example.feature', anchors: [
+       'success',
+       'successWithoutOptionalParams',    
+    ])]
+    #[BehatFeature(status: Status::FAILURE, file: 'example.feature', anchors: [
+       'paramsInvalid',    
+    ])]
+    public function getCustomerProductPlanListAction(
+        // ...
+    ) {
+        // ...
+    }
+}
+```
+
+##Feature file
+
+Contains following snippets:
+
+```
+#! success
+"""
+{
+    "example": "data""
+}
+"""
+
+#! successWithoutOptionalParams
+"""
+{
+    "example": "data""
+}
+"""
+
+#! paramsInvalid
+"""
+{
+    "example": "data""
+}
+"""
+```
 
 [master Build Status]: https://github.com/macpaw/behat-nelmio-describer/actions?query=workflow%3ACI+branch%3Amaster
 [master Build Status Image]: https://github.com/macpaw/behat-nelmio-describer/workflows/CI/badge.svg?branch=master

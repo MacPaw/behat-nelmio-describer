@@ -14,7 +14,7 @@ Step 1: Install Bundle
 Open a command console, enter your project directory and execute:
 
 ```console
-$ composer require --dev macpaw/behat-nelmio-describer
+$ composer require macpaw/behat-nelmio-describer
 ```
 
 This command requires you to have Composer installed globally, as explained

@@ -100,14 +100,13 @@ An example of usage
 
 If your feature file is located in `src/tests/Behat/Features/api/version/route/example.feature`
 
-##Configuration
+Configuration
 
 ```yaml
 behat_nelmio_describer:
   behat_test_path: '%kernel.project_dir%/tests/Behat/Features'
 ```
-
-##Controller
+Used in Controller:
 ```php
 <?php
 
@@ -152,7 +151,7 @@ final class CustomerController extends AbstractController
 }
 ```
 
-##Feature file
+Update your feature file:
 
 Contains following snippets:
 
@@ -178,6 +177,8 @@ Contains following snippets:
 }
 """
 ```
+Now in Api Doc see response payload your test:
+<img width="1040" alt="Screenshot 2022-10-26 at 12 35 44" src="https://user-images.githubusercontent.com/8971757/197991798-06cfde0a-9cb3-4065-b5af-234ce560b140.png">
 
 [master Build Status]: https://github.com/macpaw/behat-nelmio-describer/actions?query=workflow%3ACI+branch%3Amaster
 [master Build Status Image]: https://github.com/macpaw/behat-nelmio-describer/workflows/CI/badge.svg?branch=master

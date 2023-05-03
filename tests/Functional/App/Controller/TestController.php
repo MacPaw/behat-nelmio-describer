@@ -28,7 +28,7 @@ final class TestController extends AbstractController
      * @OA\Parameter(name="parameter", in="header", @OA\Schema(type="string"), required=false)
      *
      */
-    #[BehatFeature(status: Status::SUCCESS, file: 'list.feature', anchors: [
+    #[BehatFeature(status: Status::SUCCESS->value, file: 'list.feature', anchors: [
        'successByOwner',
     ])]
     #[BehatFeature(status: Status::FAILURE, file: 'list.feature', anchors: [

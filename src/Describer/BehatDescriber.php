@@ -40,7 +40,7 @@ class BehatDescriber implements DescriberInterface
                 $examples = [];
                 foreach ($attributes as $attribute) {
                     $arguments = $attribute->getArguments();
-                    $blockName = $arguments['status'];
+                    $blockName = $arguments['status']->value;
                     $fileReference = $attributeInfo->getFeaturesPath() . $arguments['file'];
                     $anchorList = array_unique($arguments['anchors']);
 

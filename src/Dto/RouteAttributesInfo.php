@@ -7,10 +7,10 @@ namespace BehatNelmioDescriber\Dto;
 class RouteAttributesInfo
 {
     public function __construct(
-        private string $routePath,
-        private string $featuresPath,
-        private array $supportedHttpMethods,
-        private array $attributes
+        private readonly string $routePath,
+        private readonly string $featuresPath,
+        private readonly array $supportedHttpMethods,
+        private readonly array $attributes
     ) {
     }
 

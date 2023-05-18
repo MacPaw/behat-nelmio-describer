@@ -6,7 +6,7 @@ namespace BehatNelmioDescriber\Retriever;
 
 class FileContentRetriever
 {
-    public function __construct(private string $behatTestPath)
+    public function __construct(private readonly string $behatTestPath)
     {
     }
 

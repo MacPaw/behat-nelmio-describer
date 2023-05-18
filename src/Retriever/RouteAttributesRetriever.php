@@ -16,8 +16,8 @@ use Symfony\Component\Routing\RouteCollection;
 class RouteAttributesRetriever
 {
     public function __construct(
-        private RouteCollection $routeCollection,
-        private ControllerReflector $controllerReflector
+        private readonly RouteCollection $routeCollection,
+        private readonly ControllerReflector $controllerReflector
     ) {
     }
 

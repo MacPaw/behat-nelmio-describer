@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace BehatNelmioDescriber\Enum;
 
-use MyCLabs\Enum\Enum;
-
-class Status extends Enum
+enum Status: string
 {
-    public const SUCCESS = 'success';
-    public const FAILURE = 'failure';
+    case SUCCESS = 'success';
+    case FAILURE = 'failure';
 }

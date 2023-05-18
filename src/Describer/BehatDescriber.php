@@ -15,8 +15,8 @@ class BehatDescriber implements DescriberInterface
     private const INVALID_REFERENCE_MESSAGE = '[Invalid reference]';
 
     public function __construct(
-        private RouteAttributesRetriever $routeAttributesRetriever,
-        private FileContentRetriever $fileContentRetriever,
+        private readonly RouteAttributesRetriever $routeAttributesRetriever,
+        private readonly FileContentRetriever $fileContentRetriever,
     ) {
     }
 
@@ -40,7 +40,7 @@ class BehatDescriber implements DescriberInterface
                 $examples = [];
                 foreach ($attributes as $attribute) {
                     $arguments = $attribute->getArguments();
-                    $blockName = $arguments['status'];
+                    $blockName = $arguments['status']->value;
                     $fileReference = $attributeInfo->getFeaturesPath() . $arguments['file'];
                     $anchorList = array_unique($arguments['anchors']);
 
